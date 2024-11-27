@@ -1,9 +1,9 @@
 <template>
   <div class="container">
-    <qr></qr>
+   123
   </div>
 </template>
 
-<script>
-import Qr from '~/icons/qr.svg'
+<script setup>
+import Qr from '~/assets/icons/qr.svg'
 </script>

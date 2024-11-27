@@ -8,7 +8,11 @@
 </template>
 
 <script setup>
-import Qr from '~/icons/qr.svg?skipsvgo'
+import Qr from '~/assets/icons/qr.svg?skipsvgo'
+
+definePageMeta({
+  layout: 'empty'
+})
 </script>
 
 <style lang="css" scoped>
