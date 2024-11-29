@@ -1,6 +1,7 @@
 import { defineStore } from "pinia"
 import {type ComputedRef, type Reactive} from "vue"
 import PocketBase from "pocketbase";
+import {API_BASE} from "~/helpers/constants";
 
 type TAccount = {
   id: string
@@ -15,8 +16,22 @@ type TStore = {
   setAccount: (email: string, token: string) => void
 }
 
+type TUserModel = {
+  avatar: string
+  collectionId: string
+  collectionName: string
+  created: string
+  email: string
+  emailVisibility: boolean
+  id: string
+  name: string
+  updated: string
+  username: string
+  verified: boolean
+}
+
 export const useAccount = defineStore("account",   () => {
-  const pb = new PocketBase('http://api.dem1dov1van.ru')
+  const pb = new PocketBase(API_BASE)
 
   const cookie = useCookie('pb_auth', {
     path:     '/',
@@ -26,7 +41,7 @@ export const useAccount = defineStore("account",   () => {
     maxAge:   604800,
   })
 
-  const userModel = ref(pb.authStore.model)
+  const userModel = ref(pb.authStore.model as TUserModel)
 
   pb.authStore.save(cookie.value?.token, cookie.value?.model);
 

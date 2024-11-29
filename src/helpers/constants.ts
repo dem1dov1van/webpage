@@ -1,0 +1,1 @@
+export const API_BASE = 'http://api.dem1dov1van.ru'

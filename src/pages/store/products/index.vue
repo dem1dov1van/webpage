@@ -1,22 +1,6 @@
 <script setup lang="ts">
-import {
-  ArrowPathIcon,
-  ChartPieIcon,
-  CursorArrowRaysIcon,
-  FingerPrintIcon,
-  SquaresPlusIcon,
-} from '@heroicons/vue/24/outline'
 import {useProducts} from "~/store/products";
 
-
-
-const products3 = [
-  { name: 'Analytics', description: 'Get a better understanding of your traffic', href: '#', icon: ChartPieIcon },
-  { name: 'Engagement', description: 'Speak directly to your customers', href: '#', icon: CursorArrowRaysIcon },
-  { name: 'Security', description: 'Your customers’ data will be safe and secure', href: '#', icon: FingerPrintIcon },
-  { name: 'Integrations', description: 'Connect with third-party tools', href: '#', icon: SquaresPlusIcon },
-  { name: 'Automations', description: 'Build strategic funnels that will convert', href: '#', icon: ArrowPathIcon },
-]
 const products1 = [
   {
     id: 1,
@@ -86,12 +70,14 @@ const fetchProducts2 = computed(() => products.value?.map((item) => {
 </script>
 
 <template>
-  <nuxt-link to="/store/login/">login</nuxt-link>
   <div>
-    <div class="flex items-center justify-center min-h-[100vh] min-w-[100vw]" v-if="isRequesting">
-      <div class="border-gray-300 h-10 w-10 animate-spin rounded-full border-8 border-t-gray-500" />
+    <div
+      v-if="isRequesting"
+      class="flex items-center justify-center min-h-[100vh] min-w-[100vw]"
+    >
+      <loader></loader>
     </div>
-    <products-card-grid v-else >
+    <products-card-grid v-else>
       <product-card
           v-for="item in fetchProducts"
           :id="item.id"

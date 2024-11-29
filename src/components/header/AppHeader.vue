@@ -48,7 +48,7 @@
           </Popover>
 
           <nuxt-link to="/store/products/" class="text-sm/6 font-semibold text-gray-900">Все товары</nuxt-link>
-          <a href="#" class="text-sm/6 font-semibold text-gray-900">Marketplace</a>
+          <nuxt-link to="/store/products/my-products/" class="text-sm/6 font-semibold text-gray-900">Мои товары</nuxt-link>
           <a href="#" class="text-sm/6 font-semibold text-gray-900">Company</a>
         </PopoverGroup>
         <div class="hidden lg:flex lg:flex-1 lg:justify-end">

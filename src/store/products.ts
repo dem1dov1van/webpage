@@ -1,9 +1,10 @@
 import { defineStore } from "pinia"
 import PocketBase from "pocketbase";
+import {API_BASE} from "~/helpers/constants";
 
 export const useProducts = defineStore("products",    () => {
 
-  const pb = new PocketBase('http://api.dem1dov1van.ru')
+  const pb = new PocketBase(API_BASE)
 
   const products = ref([])
 
@@ -14,7 +15,6 @@ export const useProducts = defineStore("products",    () => {
     pb.collection('products').getFullList({
       sort: '-created',
     }).then((res) => {
-      console.log(res, 'res from store')
       products.value = res
       isRequesting.value = false
     }).catch(e => {

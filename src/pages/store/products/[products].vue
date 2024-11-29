@@ -1,26 +1,26 @@
 <template>
-  <div v-if="data" class="mx-auto max-w-7xl p-4 lg:px-8">
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-8 mt-6">
+  <div v-if="isSuccess" class="mx-auto max-w-7xl p-4 lg:px-8">
+    <div v-if="data" class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-8 mt-6">
         <div class="grid gap-4">
             <div>
               <client-only>
                 <a
-                  :href="getImageSrc(data.images[1])"
+                  :href="getImageSrc(firstImage)"
                   data-fancybox="gallery"
                   data-caption="Caption #1"
                 >
                   <img
                     class="h-auto max-h-[400px] sm:max-h-none max-w-full rounded-lg"
-                    :src="getImageSrc(data.images[1])"
+                    :src="getImageSrc(firstImage)"
                     alt=""
                   >
                 </a>
               </client-only>
             </div>
-            <div class="grid grid-cols-5 gap-4">
+            <div v-if="images.length > 1" class="grid grid-cols-5 gap-4">
               <client-only>
                 <div
-                    v-for="(url, i) in [...data.images, ...data.images]"
+                    v-for="(url, i) in [...images,]"
                     :key="i"
                 >
                     <a
@@ -48,13 +48,23 @@
                 </div>
 
                 <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                <dt class="font-medium text-gray-900">Что это?</dt>
-                <dd class="text-gray-700 sm:col-span-2" v-html="name"></dd>
+                <dt class="font-medium text-gray-900">Название</dt>
+                <dd class="text-gray-700 sm:col-span-2" v-html="title"></dd>
                 </div>
 
                 <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                <dt class="font-medium text-gray-900">Где находится</dt>
-                <dd class="text-gray-700 sm:col-span-2">Бар на цвт19</dd>
+                  <dt class="font-medium text-gray-900">Состояние</dt>
+                  <dd class="text-gray-700 sm:col-span-2" v-html="description"></dd>
+                </div>
+
+                <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900">Габариты</dt>
+                  <dd class="text-gray-700 sm:col-span-2" v-html="dimensions"></dd>
+                </div>
+
+                <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+                  <dt class="font-medium text-gray-900">Износ</dt>
+                  <dd class="text-gray-700 sm:col-span-2" v-html="percentageOfWear"></dd>
                 </div>
 
                 <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
@@ -63,9 +73,10 @@
                 </div>
 
                 <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                <dt class="font-medium text-gray-900">Описание</dt>
-                <dd class="text-gray-700 sm:col-span-2" v-html="description"></dd>
+                  <dt class="font-medium text-gray-900">Цена со скидкой</dt>
+                  <dd class="text-gray-700 sm:col-span-2"><span v-html="`${priceWithDiscount}  ₽`"></span></dd>
                 </div>
+
             </dl>
         </div>
     </div>
@@ -76,100 +87,142 @@
         <span class="h-px flex-1 bg-black"></span>
     </span>
 
-    <section>
-          <div class="w-full bg-white rounded-lg border p-2">
+    <section v-if="statusIsParticipant === 'success'">
+        <div v-if="!isParticipant" class="w-full bg-white rounded-lg p-2">
 
           <h3 class="font-bold">Участники:</h3>
 
-          <form>
+          <p class="mb-4">
+            Нажимая кнопку вы подтверждаете свое согласие с <nuxt-link class="font-semibold text-indigo-600 hover:text-indigo-500" to="/store/rules"> правилами</nuxt-link>
+          </p>
 
-              <div class="flex flex-col">
+          <div>
+            <button @click="onClickHandler" type="submit" class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              Участвовать (12)
+            </button>
 
-                  <div class="border rounded-md p-3 ml-3 my-3">
-                      <div class="flex gap-3 items-center">
-
-                          <img src="https://avatars.githubusercontent.com/u/22263436?v=4"
-                              class="object-cover w-8 h-8 rounded-full
-                              border-2 border-emerald-400  shadow-emerald-400
-                              ">
-
-                          <h3 class="font-bold">
-                              Елена Епишина
-                          </h3>
-                      </div>
-
-
-                      <p class="text-gray-600 mt-2">
-                          Хочу красный кожаный стул!
-                      </p>
-
-                  </div>
-
-                  <div class="border rounded-md p-3 ml-3 my-3">
-                      <div class="flex gap-3 items-center">
-
-                          <img src="https://avatars.githubusercontent.com/u/22263436?v=4"
-                              class="object-cover w-8 h-8 rounded-full
-                              border-2 border-emerald-400  shadow-emerald-400
-                              ">
-
-                          <h3 class="font-bold">
-                              Олег Игоревич
-                          </h3>
-                      </div>
-
-
-                      <p class="text-gray-600 mt-2">
-                          Тоже не против забрать себе такой)
-                      </p>
-                  </div>
-              </div>
-
-
-
-              <div class="w-full px-3 my-2">
-                  <textarea
-                      class="bg-gray-100 rounded border border-gray-400 leading-normal resize-none w-full h-20 py-2 px-3 font-medium placeholder-gray-700 focus:outline-none focus:bg-white"
-                      name="body" placeholder='Оставь комментарий, если хочешь себе этот предмет' required></textarea>
-              </div>
-
-              <div class="w-full flex justify-end px-3">
-                  <input type='submit' class="px-2.5 py-1.5 rounded-md text-white text-sm bg-indigo-500" value='Отправить'>
-              </div>
-          </form>
-
+            <p class="text-red-500" v-if="errorText">
+              {{ errorText }}
+            </p>
           </div>
-      </section>
+
+        </div>
+        <div v-else class="w-full bg-white rounded-lg p-2">
+          <p>Вы и еще 12 человек хотят этот предмет</p>
+        </div>
+    </section>
+    <section v-else-if="statusIsParticipant === 'error'">
+      <span>Произошла ошибка загрузки с сервера 😞 </span>
+    </section>
+    <section v-else>
+      <loader></loader>
+    </section>
   </div>
-  <div v-else>
+  <div
+    v-else
+    class="mx-auto max-w-7xl p-4 lg:px-8"
+  >
     loading...
   </div>
 </template>
 
 <script setup lang="ts">
-import PocketBase from 'pocketbase';
+import {API_BASE} from "~/helpers/constants";
+import {useAccount} from "~/store/account";
+import {da} from "cronstrue/dist/i18n/locales/da";
+import Loader from "~/components/Loader.vue";
 
-const pb = new PocketBase('http://api.dem1dov1van.ru')
+type TProduct = {
+  collectionId: string
+  collectionName: string
+  created: string
+  description: string
+  dimensions: string
+  id: string
+  imageLink: string
+  images: string[]
+  percentageOfWear: number
+  price: number
+  priceWithDiscount: number
+  title: string
+  updated: string
+}
+
+type TError = {
+  "code": number,
+  "message": string,
+  "data": Object
+}
+
 
 const route = useRoute()
+const productId = route.params.products as string
 
-const productId = route.params.products
+const { data, status, error, refresh } = await useFetch<TProduct, TError>(`${API_BASE}/api/collections/products/records/${productId}`)
 
-const data = ref(null)
-const collectionName = ref(null)
 
-const name = computed(() => data.value.title || 'Предмет мебели')
-const price = computed(() => data.value.price || '777')
-const description = computed(() => data.value.description || 'Преобразите ваше пространство с нашим стильным барным стулом. Этот барный стул сочетает в себе современный дизайн и непревзойденный комфорт, делая его идеальным дополнением для кухонного островка, бара или обеденной зоны.')
+const isPending = computed(()=> status.value === 'pending')
+const isSuccess = computed(()=> status.value === 'success')
 
-onBeforeMount( async () => {
-  const record = await pb.collection('products').getOne(productId);
-  console.log(data.value, 'data.value')
+const title = computed(() => data.value?.title)
+const description = computed(() => data.value?.description)
+const price = computed(() => data.value?.price)
+const priceWithDiscount = computed(() => data.value?.priceWithDiscount)
+const imageLink = computed(() => data.value?.imageLink)
+const dimensions = computed(() => data.value?.dimensions)
+const percentageOfWear = computed(() => data.value?.percentageOfWear)
+const images = computed(() => data.value?.images)
+const firstImage = computed(() => images.value?.[0])
 
-  data.value = record
-  collectionName.value = record.collectionName
-})
+const {userModel} = storeToRefs(useAccount())
 
-const getImageSrc = (name:string) => `http://api.dem1dov1van.ru/api/files/${collectionName.value}/${productId}/${name}`
+const get8FirstSymbols = (str: string) => str.slice(0, 8)
+const get7LastSymbols = (str: string) => str.slice(8, 15)
+
+const getRequesId = () => `${get8FirstSymbols(userModel.value.id)}${get7LastSymbols(productId)}`
+
+const errorText = ref('')
+
+const serverMessageToText = {
+  'Failed to create record.': 'Заявка не отправлена'
+}
+
+const makeRequest = async () => {
+  if (userModel.value && userModel.value.id) {
+    const {data, status} = await useFetch<TProduct, TError>(`${API_BASE}/api/collections/requests/records/${getRequesId()}`)
+
+    isParticipant.value = !!data.value
+    statusIsParticipant.value = status.value
+  }
+}
+
+makeRequest()
+
+const isParticipant = ref(false)
+const statusIsParticipant = ref('pending')
+watch(() => userModel.value, makeRequest)
+
+
+const onClickHandler = () => {
+  if (isParticipant.value) return
+
+  $fetch(`${API_BASE}/api/collections/requests/records`, {
+    method: 'POST',
+    body: {
+      id: getRequesId(),
+      userId: userModel.value.id,
+      productId
+    }
+  }).then(() => {
+    isParticipant.value = true
+  }).catch(err => {
+    //@ts-ignore
+    errorText.value = serverMessageToText[err.data.message] ?? 'Ошибка сервера'
+    console.log('err', err)
+  })
+}
+
+
+const getImageSrc = (name: string) => `http://api.dem1dov1van.ru/api/files/products/${productId}/${name}`
 
 </script>
