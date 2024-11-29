@@ -7,7 +7,7 @@
       <loader></loader>
     </div>
 
-    <products-card-grid v-else-if="false">
+    <products-card-grid v-else-if="hasAddedProducts">
       <product-card
           v-for="item in addedProducts"
           :id="item.id"
@@ -33,6 +33,7 @@ const statusRequest = ref('pending')
 const response = ref(null)
 
 const addedProducts = reactive([])
+const hasAddedProducts = computed(() => !!addedProducts.length)
 
 const getImageSrc = (name: string, id: string) => `http://api.dem1dov1van.ru/api/files/products/${id}/${name}`
 

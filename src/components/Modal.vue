@@ -31,7 +31,11 @@
                         class="text-sm text-gray-500"
                         v-if="text"
                         v-html="text"
-                      ></p>
+                      >
+                      </p>
+                      <div v-if="$slots.text()">
+                        <slot name="text"></slot>
+                      </div>
                     </div>
                   </div>
                 </div>

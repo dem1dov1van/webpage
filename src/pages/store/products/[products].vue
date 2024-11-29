@@ -87,7 +87,7 @@
         <span class="h-px flex-1 bg-black"></span>
     </span>
 
-    <section v-if="statusIsParticipant === 'success'">
+    <section v-if="statusIsParticipant === 'success' || statusIsParticipant === 'error'">
         <div v-if="!isParticipant" class="w-full bg-white rounded-lg p-2">
 
           <h3 class="font-bold">Участники:</h3>
@@ -111,9 +111,6 @@
           <p>Вы и еще 12 человек хотят этот предмет</p>
         </div>
     </section>
-    <section v-else-if="statusIsParticipant === 'error'">
-      <span>Произошла ошибка загрузки с сервера 😞 </span>
-    </section>
     <section v-else>
       <loader></loader>
     </section>
@@ -122,8 +119,32 @@
     v-else
     class="mx-auto max-w-7xl p-4 lg:px-8"
   >
-    loading...
+    <loader></loader>
   </div>
+  <modal
+    :open="false"
+    title="Произошла ошибка авторизации"
+    text="Повторите попытку позднее или напишите <a class='text-red-500' href='https://t.me/dem1dov1van' target='_blank'>@dem1dov1van</a> о&nbsp;проблеме"
+    btn2="Ок"
+  ></modal>
+  <modal
+    :open="isOpenSuccessModal"
+    status="success"
+    @toggle="toggleSuccessModalHandler"
+    title="Вы участвуете в розыгрыше этого товара"
+    btn2="Ок"
+  >
+    <template #text>
+      <p class="text-sm text-gray-500">
+        Этот товар появится у тебя на странице <nuxt-link
+          to='/store/products/my-products/'
+          class="font-semibold text-indigo-600 hover:text-indigo-500"
+      >
+        мои товары
+      </nuxt-link>
+      </p>
+    </template>
+  </modal>
 </template>
 
 <script setup lang="ts">
@@ -154,6 +175,10 @@ type TError = {
   "data": Object
 }
 
+const isOpenSuccessModal = ref(false)
+const toggleSuccessModalHandler = (boo: boolean) => {
+  isOpenSuccessModal.value = boo
+}
 
 const route = useRoute()
 const productId = route.params.products as string
@@ -215,6 +240,7 @@ const onClickHandler = () => {
     }
   }).then(() => {
     isParticipant.value = true
+    isOpenSuccessModal.value = true
   }).catch(err => {
     //@ts-ignore
     errorText.value = serverMessageToText[err.data.message] ?? 'Ошибка сервера'
