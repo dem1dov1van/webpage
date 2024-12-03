@@ -7,7 +7,9 @@ import {
   DialogTitle,
 } from '@headlessui/vue'
 import {useAccount} from "~/store/account";
+import {useFormAuth} from "~/composables/useFormAuth";
 
+const {doLogout} = useFormAuth()
 const {isAuth, isVerify, userModel} = storeToRefs(useAccount())
 
 const isOpen = ref(false)
@@ -21,7 +23,11 @@ function openModal() {
 </script>
 
 <template>
-  <div v-if="isAuth" class="flex items-center gap-2 max-w-[150px] cursor-pointer" @click="isOpen = !isOpen">
+  <div
+    v-if="isAuth"
+    class="flex items-center justify-end gap-2 cursor-pointer w-full"
+    @click="isOpen = !isOpen"
+  >
     <div class="w-[32px] h-[32px] min-w-[32px] min-h-[32px] bg-gray-300 flex items-center justify-center rounded-full relative">
       <span v-html="userModel.email[0].toUpperCase()"></span>
       <svg v-if="isVerify" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="green" class="size-4 absolute bottom-0 right-0 translate-x-1 translate-y-1">
@@ -31,7 +37,7 @@ function openModal() {
         <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14Zm2.78-4.22a.75.75 0 0 1-1.06 0L8 9.06l-1.72 1.72a.75.75 0 1 1-1.06-1.06L6.94 8 5.22 6.28a.75.75 0 0 1 1.06-1.06L8 6.94l1.72-1.72a.75.75 0 1 1 1.06 1.06L9.06 8l1.72 1.72a.75.75 0 0 1 0 1.06Z" clip-rule="evenodd" />
       </svg>
     </div>
-    <div v-html="userModel.email" class="text-ellipsis max-w-[70%] overflow-hidden"></div>
+    <div v-html="userModel.email" class="text-ellipsis max-w-[70%] whitespace-nowrap overflow-hidden"></div>
 
     <TransitionRoot appear :show="isOpen" as="template">
       <Dialog as="div" @close="closeModal" :open="isOpen" class="relative z-10">
@@ -70,10 +76,17 @@ function openModal() {
                   {{ isVerify ? 'Верификация пройдена!' : 'Верификация не пройдена.'}}
 
                 </DialogTitle>
-                <div class="mt-2">
-                  <p class="text-sm text-gray-500">
+                <div class="mt-2 ">
+                  <p class="text-sm text-gray-500 mb-4">
                     {{ isVerify ? 'Теперь можно пользоваться приложением в полной мере' : 'Чтобы получить дополнительные возможности - подтвердите почту. Письмо было отправлено при регистрации'}}
                   </p>
+
+                  <span
+                      @click="doLogout"
+                      class="font-semibold text-indigo-600 hover:text-indigo-500 cursor-pointer"
+                  >
+                    Выйти из аккаунта
+                  </span>
                 </div>
 
                 <div class="mt-4">
@@ -93,9 +106,9 @@ function openModal() {
     </TransitionRoot>
   </div>
   <div v-else class="py-2 flex gap-2">
-    <nuxt-link to="/store/login/" class="block text-sm/6 text-gray-900">Sign in</nuxt-link>
+    <nuxt-link to="/store/login/" class="block text-sm/6 text-gray-900">Войти</nuxt-link>
     <div>|</div>
-    <nuxt-link to="/store/registration/" class=" pt-0 text-sm/6 text-gray-800">Create account</nuxt-link>
+    <nuxt-link to="/store/registration/" class=" pt-0 text-sm/6 text-gray-800">Создать аккаунт</nuxt-link>
   </div>
 </template>
 

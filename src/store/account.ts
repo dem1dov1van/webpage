@@ -28,6 +28,7 @@ type TUserModel = {
   updated: string
   username: string
   verified: boolean
+  isAdmin: boolean
 }
 
 export const useAccount = defineStore("account",   () => {

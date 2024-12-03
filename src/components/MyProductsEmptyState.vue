@@ -31,7 +31,7 @@
       </svg>
       <div>
         <h2 class="text-center text-black text-xl font-semibold leading-loose pb-2">Пока что тут пусто</h2>
-        <p class="text-center text-black text-base font-normal leading-relaxed pb-4">Здесь будут товары <br />которые тебе приглянулись </p>
+        <p class="text-center text-black text-base font-normal leading-relaxed pb-4">Здесь появятся товары, <br />которые тебе приглянулись </p>
         <div class="flex gap-3">
           <nuxt-link
               to="/store/rules/"
