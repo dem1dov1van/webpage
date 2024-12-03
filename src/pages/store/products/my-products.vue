@@ -38,7 +38,7 @@ const response = ref(null)
 const addedProducts = computed(() => products.value.filter(item => response.value?.some(res => res.productId === item.id)))
 const hasAddedProducts = computed(() => !!addedProducts.value.length)
 
-const getImageSrc = (name: string, id: string) => `http://api.dem1dov1van.ru/api/files/products/${id}/${name}`
+const getImageSrc = (name: string, id: string) => `${API_BASE}/api/files/products/${id}/${name}`
 
 const tryMakeRequest = async () => {
   if (userModel.value && userModel.value.id) {

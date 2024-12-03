@@ -33,7 +33,7 @@
                         v-html="text"
                       >
                       </p>
-                      <div v-if="$slots.text()">
+                      <div v-if="$slots.text">
                         <slot name="text"></slot>
                       </div>
                     </div>
@@ -68,7 +68,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
 import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
 import { ExclamationTriangleIcon, CheckCircleIcon } from '@heroicons/vue/24/outline'
 

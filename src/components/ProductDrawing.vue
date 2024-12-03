@@ -118,11 +118,11 @@
   </section>
 
   <modal
-      :open="isOpenSuccessModal"
-      status="success"
-      @toggle="toggleSuccessModalHandler"
-      title="Успех! Ты подтвердил участие!"
-      btn2="Ок"
+    :open="isOpenSuccessModal"
+    status="success"
+    @toggle="toggleSuccessModalHandler"
+    title="Успех! Ты подтвердил участие!"
+    btn2="Ок"
   >
     <template #text>
       <p class="text-sm text-gray-500">

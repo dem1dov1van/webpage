@@ -119,6 +119,7 @@ export const useFormAuth = () => {
 
   const doLogout = () => {
     pb.authStore.clear()
+    navigateTo('/store/login/')
   }
 
   const resetServerError = () => {

@@ -91,7 +91,6 @@
 <script setup lang="ts">
 import SLogo from '~/assets/icons/logo/shopping-t-rex.svg?skipsvgo'
 import DInput from "~/components/DInput.vue";
-import type {Rules} from "async-validator";
 import {useAccount} from "~/store/account";
 import {useFormAuth} from "~/composables/useFormAuth";
 const {form, submitRegister, doLogout, validation, serverError, resetServerError} = useFormAuth()

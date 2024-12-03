@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import {useProducts} from "~/store/products";
+import {API_BASE} from "~/helpers/constants";
 
 const {products, isRequesting} = storeToRefs(useProducts())
 
@@ -7,7 +8,7 @@ const fetchProducts = computed(() => products.value?.filter(item => !item.winner
   const obj = {
     id: item.id,
     title: item.title,
-    imageSrc: `http://api.dem1dov1van.ru/api/files/${item.collectionName}/${item.id}/${item.images[0]}`,
+    imageSrc: `${API_BASE}/api/files/${item.collectionName}/${item.id}/${item.images[0]}`,
     price: item.price
   }
 

@@ -88,10 +88,13 @@
       <span class="h-px flex-1 bg-black"></span>
     </span>
 
-    <product-drawing
-      v-if="data"
-      :product="data"
-    ></product-drawing>
+    <template v-if="isAuth">
+      <product-drawing
+          v-if="data"
+          :product="data"
+      ></product-drawing>
+    </template>
+    <p v-else class="mb-8">Зарегистрируйтесь для участия</p>
   </div>
   <div
     v-else
@@ -106,6 +109,7 @@ import ProductDrawing from "~/components/ProductDrawing.vue";
 import Loader from "~/components/Loader.vue";
 import {API_BASE} from "~/helpers/constants";
 import type {TProduct} from "~/types";
+import {useAccount} from "~/store/account";
 
 type TError = {
   "code": number,
@@ -113,14 +117,15 @@ type TError = {
   "data": Object
 }
 
+const {isAuth} = storeToRefs(useAccount())
+
 const route = useRoute()
 const productId = route.params.products as string
 
 const { data, status, error, refresh } = await useFetch<TProduct, TError>(`${API_BASE}/api/collections/products/records/${productId}`)
 
-const isPending = computed(()=> status.value === 'pending')
-
-const isSuccess = computed(()=> status.value === 'success')
+const isPending = computed(() => status.value === 'pending')
+const isSuccess = computed(() => status.value === 'success')
 
 const title = computed(() => data.value?.title)
 const description = computed(() => data.value?.description)
@@ -134,6 +139,6 @@ const firstImage = computed(() => images.value?.[0])
 const winner = computed(() => data.value?.winner)
 
 
-const getImageSrc = (name: string) => `http://api.dem1dov1van.ru/api/files/products/${productId}/${name}`
+const getImageSrc = (name: string) => `${API_BASE}/api/files/products/${productId}/${name}`
 
 </script>
