@@ -1,12 +1,13 @@
 <template>
-  <div>
+  <Breadcrumbs :items="breadcrumbs"></Breadcrumbs>
+
+  <div class="mt-4">
     <div
-        v-if="statusRequest === 'pending' && isRequesting"
-        class="flex items-center justify-center min-h-[100vh] min-w-[100vw]"
+      v-if="statusRequest === 'pending' && isRequesting"
+      class="flex items-center justify-center min-h-[100vh] min-w-[100vw]"
     >
       <loader></loader>
     </div>
-
     <products-card-grid v-else-if="hasAddedProducts">
       <product-card
         v-for="item in addedProducts"
@@ -18,7 +19,6 @@
         :is-win="item.winner === userModel.id"
       ></product-card>
     </products-card-grid>
-
     <my-products-empty-state v-else></my-products-empty-state>
   </div>
 </template>
@@ -76,4 +76,14 @@ watch(() => userModel.value, tryMakeRequest)
 // }
 
 // watch(response, requestAllProducts)
+
+const breadcrumbs = [
+  {
+    label: 'Все продукты',
+    to: '/store/products/'
+  },
+  {
+    label: 'Мои продукты'
+  }
+]
 </script>

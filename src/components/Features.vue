@@ -3,9 +3,8 @@
 </script>
 
 <template>
-  <section>
-    <div class="mx-auto w-full max-w-7xl px-5 py-12 md:px-10 md:py-16 lg:py-20">
-      <div class="flex flex-col items-center">
+  <Container>
+    <div class="flex flex-col items-center">
         <div class="mb-4 md:mb-6 lg:mb-8">
           <h2 class="text-2xl font-bold md:text-3xl w-full max-w-2xl text-center"> Расчет износа </h2>
         </div>
@@ -21,9 +20,9 @@
                 </td>
                 <td class="py-3 px-6 md:px-12  text-center">
                   <div class="relative flex gap-3 items-center justify-center">
-                    <span class="font-bold">
-                      Состояние
-                    </span>
+                  <span class="font-bold">
+                    Состояние
+                  </span>
                     <div class="absolute -top-3 -left-6 md:-left-12 bg-gray-300 h-20 w-[1px]"></div>
                   </div>
                 </td>
@@ -38,9 +37,9 @@
                 </td>
                 <td class="py-3 px-6 md:px-12 text-center">
                   <div class="relative flex gap-3 items-center">
-                    <span class="font-semibold">
-                      Отличное
-                    </span>
+                  <span class="font-semibold">
+                    Отличное
+                  </span>
                     <div class="absolute -top-3 -left-6 md:-left-12 bg-gray-300 h-20 w-[1px]"></div>
                   </div>
                 </td>
@@ -53,9 +52,9 @@
                 </td>
                 <td class="py-3 px-6 md:px-12">
                   <div class="relative flex gap-3 items-center">
-                    <span class="font-semibold">
-                      Хорошее. Требуется химчистка
-                    </span>
+                  <span class="font-semibold">
+                    Хорошее. Требуется химчистка
+                  </span>
                     <div class="absolute -top-3 -left-6 md:-left-12 bg-gray-300 h-20 w-[1px]"></div>
                   </div>
                 </td>
@@ -68,9 +67,9 @@
                 </td>
                 <td class="py-3 px-6 md:px-12">
                   <div class="relative flex gap-3 items-center">
-                    <span class="font-semibold">
-                      Хорошее. Есть потертости/царапины
-                    </span>
+                  <span class="font-semibold">
+                    Хорошее. Есть потертости/царапины
+                  </span>
                     <div class="absolute -top-3 -left-6 md:-left-12 bg-gray-300 h-20 w-[1px]"></div>
                   </div>
                 </td>
@@ -83,9 +82,9 @@
                 </td>
                 <td class="py-3 px-6 md:px-12">
                   <div class="relative flex gap-3 items-center">
-                    <span class="font-semibold">
-                      Хорошее. Есть потертости/царапины + деформация и/или пятна
-                    </span>
+                  <span class="font-semibold">
+                    Хорошее. Есть потертости/царапины + деформация и/или пятна
+                  </span>
                     <div class="absolute -top-3 -left-6 md:-left-12 bg-gray-300 h-20 w-[1px]"></div>
                   </div>
                 </td>
@@ -98,9 +97,9 @@
                 </td>
                 <td class="py-3 px-6 md:px-12">
                   <div class="relative flex gap-3 items-center">
-                    <span class="font-semibold">
-                      Удовл. Есть сильные потертости/царапины
-                    </span>
+                  <span class="font-semibold">
+                    Удовл. Есть сильные потертости/царапины
+                  </span>
                     <div class="absolute -top-3 -left-6 md:-left-12 bg-gray-300 h-20 w-[1px]"></div>
                   </div>
                 </td>
@@ -113,9 +112,9 @@
                 </td>
                 <td class="py-3 px-6 md:px-12">
                   <div class="relative flex gap-3 items-center">
-                    <span class="font-semibold">
-                      Удовл. Есть сильные потертости/царапины + деформация/пятна
-                    </span>
+                  <span class="font-semibold">
+                    Удовл. Есть сильные потертости/царапины + деформация/пятна
+                  </span>
                     <div class="absolute -top-3 -left-6 md:-left-12 bg-gray-300 h-20 w-[1px]"></div>
                   </div>
                 </td>
@@ -125,8 +124,7 @@
           </div>
         </div>
       </div>
-    </div>
-  </section>
+  </Container>
 </template>
 
 <style scoped lang="css">

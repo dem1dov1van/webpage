@@ -61,9 +61,9 @@ const isAdmin = computed(() => userModel.value?.isAdmin || false)
 </script>
 
 <template>
-  <div v-if="isAdmin" class="flow-root rounded-lg border border-gray-100 p-3 shadow-sm">
+  <div v-if="isAdmin" class="flow-root p-3">
 
-    <h2 class="text-xl mb-4">Эту половину видят только админы:</h2>
+    <h2 class="text-xl mb-4">Эту часть видят только админы:</h2>
 
     <template v-if="!product.winner">
       <p class="mb-2">

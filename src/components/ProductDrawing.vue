@@ -72,12 +72,12 @@
 
 <template>
   <section v-if="statusIsParticipant === 'success'">
-    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:gap-8 mt-6">
+    <div class="grid grid-cols-1 gap-4 lg:gap-8">
       <div v-if="product.winner === userModel.id" class="grid gap-4">
         Ура, фортуна на твоей стороне <br>
         После оплаты, ты - новый владелец!
       </div>
-      <div v-else>
+      <div v-else class="p-3">
         <div v-if="!isParticipant">
           <div>
             <button
@@ -106,11 +106,11 @@
           <p><drawing-count :product-id="productId" text></drawing-count></p>
         </div>
       </div>
-
-      <drawing-admin
-        :product
-      ></drawing-admin>
     </div>
+
+    <drawing-admin
+        :product
+    ></drawing-admin>
   </section>
 
   <section v-else>

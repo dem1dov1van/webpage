@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Breadcrumbs from "~/components/breadcrumbs/Breadcrumbs.vue"
 import {useProducts} from "~/store/products";
 import {API_BASE} from "~/helpers/constants";
 
@@ -9,22 +10,32 @@ const fetchProducts = computed(() => products.value?.filter(item => !item.winner
     id: item.id,
     title: item.title,
     imageSrc: `${API_BASE}/api/files/${item.collectionName}/${item.id}/${item.images[0]}`,
-    price: item.price
+    price: item.priceWithDiscount
   }
 
   return obj
 }))
+
+const breadcrumbs = [
+  {
+    label: 'Все продукты'
+  }
+]
 </script>
 
 <template>
   <div>
+    <Breadcrumbs :items="breadcrumbs"></Breadcrumbs>
     <div
       v-if="isRequesting"
       class="flex items-center justify-center min-h-[100vh] min-w-[100vw]"
     >
       <loader></loader>
     </div>
-    <products-card-grid v-else>
+    <products-card-grid
+        v-else
+      class="mt-4"
+    >
       <product-card
           v-for="item in fetchProducts"
           :id="item.id"
