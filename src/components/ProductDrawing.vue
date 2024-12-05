@@ -73,7 +73,7 @@
 <template>
   <section v-if="statusIsParticipant === 'success'">
     <div class="grid grid-cols-1 gap-4 lg:gap-8">
-      <div v-if="product.winner === userModel.id" class="grid gap-4">
+      <div v-if="product.winner === userModel.id" class="grid gap-4 p-3">
         Ура, фортуна на твоей стороне <br>
         После оплаты, ты - новый владелец!
       </div>

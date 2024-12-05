@@ -6,7 +6,7 @@ const props = defineProps<{
 }>()
 
 
-const isOpen = ref(props?.isOpen || false)
+const isOpen = ref(props?.isOpen || true)
 const toggleItem = () => {
   isOpen.value = !isOpen.value
 }
@@ -15,7 +15,7 @@ const toggleItem = () => {
 <template>
   <div
       @click="toggleItem"
-      class="relative my-3 w-full rounded-md border border-gray-300 px-12 py-8 cursor-pointer"
+      class="relative my-3 w-full rounded-md border border-gray-300 px-6 py-4 cursor-pointer"
   >
     <div class="max-w-3xl">
       <h2 class="font-bold text-black text-xl"> {{ title }}</h2>
@@ -30,7 +30,7 @@ const toggleItem = () => {
         ></p>
       </template>
     </div>
-    <span class="absolute right-5 top-9">
+    <span class="absolute right-3 top-5">
       <svg v-if="isOpen" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
         <circle cx="12" cy="12" r="12" fill="white"></circle>
         <path d="M7.04688 11.9999H16.9469" stroke="black" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>

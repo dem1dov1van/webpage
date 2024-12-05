@@ -16,16 +16,19 @@
 
   <accordion></accordion>
 
-  <div class="mx-auto max-w-2xl px-4 py-4 sm:px-6 sm:py-8 lg:max-w-7xl lg:px-8">
-    <nuxt-link
-      class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed cursor-pointer"
-      to="/store/products/"
-    >
-      К товарам!
-    </nuxt-link>
-  </div>
+  <Container>
+    <div class="max-w-4xl flex-col mx-auto mb-20">
+      <nuxt-link
+        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed cursor-pointer"
+        to="/store/products/"
+      >
+        К товарам!
+      </nuxt-link>
+    </div>
+  </Container>
 
 </template>
+
 <script setup lang="ts">
 import Accordion from "~/components/Accordion.vue";
 import Tearms from "~/components/Tearms.vue";

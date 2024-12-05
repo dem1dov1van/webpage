@@ -1,27 +1,27 @@
 <template>
   <Container>
-    <nav class="flex " aria-label="Breadcrumb">
-      <ol class="inline-flex items-center space-x-1">
+    <nav class="flex" aria-label="Breadcrumb">
+      <ol class="inline-flex items-center space-x-1 flex-wrap gap-2">
         <li
-            v-for="(item, i) in items"
-            class="inline-flex items-center"
-            :key="i"
+          v-for="(item, i) in items"
+          class="inline-flex items-center !m-0 gap-2"
+          :key="i"
         >
-          <span class="mx-1 text-gray-600 text-xs">/</span>
+
           <nuxt-link
               v-if="i < items.length - 1"
               :to="item.to"
-              class="ml-1 inline-flex text-xs text-gray-600 hover:underline cursor-pointer font-light"
+              class="inline-flex text-xs text-gray-600 hover:underline cursor-pointer font-light"
           >
             {{ item.label }}
           </nuxt-link>
-          <span v-if="i > items.length - 1" class="mx-1 text-gray-600 text-xs">/</span>
           <span
               v-if="i === items.length - 1"
-              class="ml-1 text-xs text-gray-600 font-light"
+              class=" text-xs text-gray-600 font-light"
           >
             {{ item.label }}
           </span>
+          <span v-if="i < items.length - 1 || i < 1" class="mx-1 text-gray-600 text-xs">/</span>
         </li>
       </ol>
     </nav>

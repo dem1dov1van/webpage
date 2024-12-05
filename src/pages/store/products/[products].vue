@@ -72,12 +72,12 @@
               </div>
 
               <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                <dt class="font-medium text-gray-900">Фото</dt>
+                <dt class="font-medium text-gray-900 ">Фото</dt>
                 <dd class="text-gray-700 sm:col-span-2">
                   <a
                     :href="imageLink"
                     target="_blank"
-                    class="font-semibold text-indigo-600 hover:text-indigo-500"
+                    class="font-semibold text-indigo-600 hover:text-indigo-500 break-all"
                   >
                     {{imageLink}}
                   </a>
@@ -86,12 +86,16 @@
 
               <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                 <dt class="font-medium text-gray-900">Цена</dt>
-                <dd class="text-gray-700 sm:col-span-2"><span v-html="price"></span> ₽</dd>
+                <dd class="text-gray-700 sm:col-span-2">
+                  <span v-html="priceFormatter(price ?? 0)"></span>
+                </dd>
               </div>
 
               <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                 <dt class="font-medium text-gray-900">Цена со скидкой</dt>
-                <dd class="text-gray-700 sm:col-span-2"><span v-html="`${priceWithDiscount}  ₽`"></span></dd>
+                <dd class="text-gray-700 sm:col-span-2">
+                  <span v-html="priceFormatter(priceWithDiscount ?? 0)"></span>
+                </dd>
               </div>
 
             </dl>
@@ -127,6 +131,7 @@ import Attention from '~/assets/icons/attention.svg?skipsvgo'
 import {API_BASE} from "~/helpers/constants";
 import type {TProduct} from "~/types";
 import {useAccount} from "~/store/account";
+import {priceFormatter} from "~/helpers";
 
 type TError = {
   "code": number,

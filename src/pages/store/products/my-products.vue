@@ -17,6 +17,7 @@
         :price="item.price"
         :imageSrc="getImageSrc(item.images[0], item.id)"
         :is-win="item.winner === userModel.id"
+        is-show-status
       ></product-card>
     </products-card-grid>
     <my-products-empty-state v-else></my-products-empty-state>
@@ -29,7 +30,6 @@ import {API_BASE} from "~/helpers/constants";
 import {useAccount} from "~/store/account";
 import {useProducts} from "~/store/products";
 const {userModel} = storeToRefs(useAccount())
-const {pb} = useAccount()
 const {products, isRequesting} = storeToRefs(useProducts())
 
 const statusRequest = ref('pending')
