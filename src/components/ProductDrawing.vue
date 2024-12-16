@@ -22,7 +22,8 @@
   const statusIsParticipant = ref('pending')
 
   const serverMessageToText = {
-    'Failed to create record.': 'Заявка не отправлена'
+    'Failed to create record.': 'Заявка не отправлена',
+    "The requested resource wasn't found.": 'Заявка не была удалена'
   }
 
   const { data, refresh, status } = useAsyncData('fetchData', async () => {
@@ -68,6 +69,22 @@
     isOpenSuccessModal.value = boo
   }
 
+  const onDeleteClickHandler = () => {
+    console.log('deleted id is', requestId.value)
+    $fetch(`${API_BASE}/api/collections/requests/records/${requestId.value}`, {
+      method: 'DELETE',
+      body: {
+        id: userModel.value.id,
+      }
+    }).then(() => {
+      navigateTo('/store/products/')
+    }).catch(err => {
+      //@ts-ignore
+      errorText.value = serverMessageToText[err.data.message] ?? 'Ошибка сервера'
+      console.dir( err)
+      console.log( errorText.value)
+    })
+  }
 </script>
 
 <template>
@@ -104,6 +121,15 @@
         <div v-else class="w-full bg-white rounded-lg p-2">
           <p>Твое участие зарегистрированно!</p>
           <p><drawing-count :product-id="productId" text></drawing-count></p>
+          <button
+            @click="onDeleteClickHandler"
+            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed mt-2"
+          >
+            Отказаться от участия
+          </button>
+          <p class="text-red-500 mt-1" v-if="errorText">
+            {{ errorText }}
+          </p>
         </div>
       </div>
     </div>

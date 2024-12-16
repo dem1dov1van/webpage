@@ -20,6 +20,7 @@ defineProps<{
       <img
         :src="imageSrc"
         :alt="title"
+        loading="lazy"
         class="h-full w-full object-cover min-h-[100px] object-center [@media(any-hover:hover){&:hover}]:group-hover:opacity-75"
       />
     </div>
