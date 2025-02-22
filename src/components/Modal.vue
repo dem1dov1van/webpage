@@ -75,7 +75,7 @@ withDefaults(defineProps<{
   open: boolean,
   title: string,
   text: string,
-  btn1: string,
+  btn1?: string,
   btn2: string,
   status: 'success' | 'error'
 }>(), {

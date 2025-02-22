@@ -29,6 +29,7 @@ type TUserModel = {
   username: string
   verified: boolean
   isAdmin: boolean
+  isAgree: boolean
 }
 
 export const useAccount = defineStore("account",   () => {
@@ -65,6 +66,7 @@ export const useAccount = defineStore("account",   () => {
 
   const isAuth = computed<boolean>(() => !!userModel.value)
   const isVerify = computed<boolean>(() => userModel.value?.verified)
+  const isAgree = computed<boolean>(() => userModel.value?.isAgree)
 
   // watch(isAuth, () => {
   //   console.log(isAuth.value, 'isAuth.value')
@@ -75,6 +77,7 @@ export const useAccount = defineStore("account",   () => {
     pb,
     isAuth,
     isVerify,
-    userModel
+    userModel,
+    isAgree
   }
 })

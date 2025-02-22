@@ -11,7 +11,7 @@
     product: TProduct
   }>()
 
-  const {userModel} = storeToRefs(useAccount())
+  const {userModel, isAgree} = storeToRefs(useAccount())
   const route = useRoute()
 
   const isParticipant = ref(false)
@@ -98,6 +98,7 @@
         <div v-if="!isParticipant">
           <div>
             <button
+              v-if="isAgree"
               @click="onClickHandler"
               class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-3"
             >
@@ -107,6 +108,19 @@
                 with-brackets
               ></drawing-count>
             </button>
+            <div v-else>
+              <p>Для участия в розыгрыше необходимо согласиться </p>
+              <button
+                @click="onClickHandler"
+                class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-3"
+              >
+                Участвовать&nbsp;
+                <drawing-count
+                    :product-id="productId"
+                    with-brackets
+                ></drawing-count>
+              </button>
+            </div>
 
             <p class="text-red-500 mb-2" v-if="errorText">
               {{ errorText }}

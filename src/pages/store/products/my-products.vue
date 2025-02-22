@@ -14,7 +14,7 @@
         :id="item.id"
         :key="item.id"
         :title="item.title"
-        :price="item.price"
+        :price="item.priceWithDiscount"
         :imageSrc="getImageSrc(item.images[0], item.id)"
         :is-win="item.winner === userModel.id"
         is-show-status

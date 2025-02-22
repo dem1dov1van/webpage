@@ -84,12 +84,12 @@
                 </dd>
               </div>
 
-              <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                <dt class="font-medium text-gray-900">Цена</dt>
-                <dd class="text-gray-700 sm:col-span-2">
-                  <span v-html="priceFormatter(price ?? 0)"></span>
-                </dd>
-              </div>
+<!--              <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">-->
+<!--                <dt class="font-medium text-gray-900">Цена</dt>-->
+<!--                <dd class="text-gray-700 sm:col-span-2">-->
+<!--                  <span v-html="priceFormatter(price ?? 0)"></span>-->
+<!--                </dd>-->
+<!--              </div>-->
 
               <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                 <dt class="font-medium text-gray-900">Цена со скидкой</dt>
@@ -101,7 +101,11 @@
             </dl>
           </div>
           <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
-            <template v-if="isAuth">
+            <p v-if="isAuth && !isAgree" class="p-3 flex items-center justify-center gap-2">
+              Для участия необходимо согласие с <nuxt-link to="/store/rules/" class="font-semibold text-indigo-600 hover:text-indigo-500">правилами</nuxt-link>
+              <Attention class="max-w-[25px] max-h-[25px]"></Attention>
+            </p>
+            <template v-else-if="isAuth">
               <product-drawing
                   v-if="data"
                   :product="data"
@@ -139,7 +143,7 @@ type TError = {
   "data": Object
 }
 
-const {isAuth} = storeToRefs(useAccount())
+const {isAuth, isAgree} = storeToRefs(useAccount())
 
 const route = useRoute()
 const productId = route.params.products as string

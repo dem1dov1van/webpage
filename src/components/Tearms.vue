@@ -44,7 +44,78 @@
         Надеюсь юристы помогу тут что-то написать правильное, а то пока как-то неоч
       </p>
     </div>
+
+    <div v-if="!isAgree">
+      <button
+        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed cursor-pointer"
+        @click="onAgreeClickHandler"
+      >
+        Согласен с условиями
+      </button>
+    </div>
+    <div v-else>
+      <p>
+        Вы подтвердили свое согласие с правилами (база данных все помнит)
+      </p>
+    </div>
+
+    <modal
+      :open="isOpenModal"
+      status="success"
+      @toggle="toggleModalHandler"
+      title="Подтверждение"
+      btn2="Согласен"
+      @btn2-click="setIsAgree"
+    >
+      <template #text>
+        <p class="text-sm text-gray-500">
+          Нажимая кнопку согласия - подтверждаешь свое соглание с правилами участия
+        </p>
+      </template>
+    </modal>
+
+    <modal
+      :open="isOpenErrorModal"
+      @toggle="toggleErrorModalHandler"
+      title="Не удалось сохранить согласие"
+      btn1="Закрыть"
+    >
+      <template #text>
+        <p class="text-sm text-gray-500 mb-2">
+          Произошла ошибка: <span v-html="error"></span>
+        </p>
+
+        <p class="text-sm text-gray-500">
+          Попробуйте позже
+        </p>
+      </template>
+    </modal>
   </Container>
 </template>
+
 <script setup lang="ts">
+import {useAccount} from "~/store/account";
+
+const {isAgree, userModel} = storeToRefs(useAccount());
+const {pb} = useAccount()
+const isOpenModal = ref(false);
+
+const isOpenErrorModal = ref(false);
+const error = ref('')
+
+const toggleModalHandler = () => isOpenModal.value = !isOpenModal.value
+const toggleErrorModalHandler = () => isOpenErrorModal.value = !isOpenErrorModal.value
+const onAgreeClickHandler = () => isOpenModal.value = true
+
+const setIsAgree = async() => {
+  const data =  {
+    isAgree: true,
+  }
+
+  try {
+    await pb.collection('users').update(userModel.value.id, data);
+  } catch (error) {
+    console.error('Error updating isAgree:', error);
+  }
+}
 </script>
