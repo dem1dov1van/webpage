@@ -8,6 +8,13 @@ export default defineNuxtConfig({
     'nuxt-svgo',
     '@nuxtjs/tailwindcss',
     "@vueuse/nuxt",
+    [
+      'yandex-metrika-module-nuxt3',
+      {
+        id: '100021991',
+        webvisor: true,
+      }
+    ]
   ],
   css: [
     '~/css/reset.css',

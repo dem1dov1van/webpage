@@ -1,5 +1,5 @@
 <template>
-  <header class="bg-white sticky top-0 shadow-sm">
+  <header class="bg-white sticky top-0 shadow-sm z-10">
       <nav class="mx-auto flex max-w-7xl items-center justify-between p-4 lg:px-8" aria-label="Global">
         <div class="flex lg:flex-1">
           <nuxt-link to="/store/products/" class="-m-1.5 p-1.5">
@@ -83,8 +83,8 @@ import {
   Bars3Icon, XMarkIcon
 } from "@heroicons/vue/24/outline";
 import SLogo from '~/assets/icons/logo/shopping-t-rex.svg?skipsvgo'
-import {ref} from "vue";
 import HeaderAccountInfo from "~/components/header/HeaderAccountInfo.vue";
+import {ref} from "vue";
 
 const {doLogout} = useFormAuth()
 const mobileMenuOpen = ref(false)

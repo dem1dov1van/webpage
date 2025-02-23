@@ -23,7 +23,8 @@
     "pinia": "^2.2.6",
     "pocketbase": "^0.21.5",
     "vue": "latest",
-    "vue-router": "latest"
+    "vue-router": "latest",
+    "yandex-metrika-module-nuxt3": "^1.5.3"
   },
   "devDependencies": {
     "@nuxtjs/tailwindcss": "^6.12.2",

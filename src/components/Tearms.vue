@@ -5,13 +5,18 @@
       <h1 class="mb-10 text-3xl font-bold md:text-5xl">Правила участия</h1>
       <!-- Term -->
       <div class="mb-6 flex flex-col items-start gap-y-3">
+        <p class="text-sm sm:text-base">
+          Выбирайте понравившийся товар и&nbsp;добавляйте в&nbsp;корзину. Количество товара неограниченно. Через 3&nbsp;недели после запуска распродажи мы&nbsp;проведем розыгрыш с&nbsp;помощью рандомайзера. Если ваша фамилия выпала, то&nbsp;у&nbsp;вас будет возможность выкупить свой товар. Как далее выкупается офисная мебель описано тут.
+        </p>
+      </div>
+      <div class="mb-6 flex flex-col items-start gap-y-3">
         <p class="font-bold uppercase sm:text-base">1. Термины</p>
         <p class="text-sm sm:text-base">
-          1.1. Участник - авторизованный, верифицированный работник Селектел и всех дочерних организаций.
-          <br />1.2. Предмет мебели (товар) - предмет мебели, выставленный на продажу в этом приложении.
-          <br />1.3. Розыгрыш - случайное определение будущего покупателя предмета мебели.
-          <br />1.4. Победитель - случайно выбранный участник, которому досталось право выкупить предмет мебели.
-          <br />1.5. Износ - коэффициент износа мебели; чем меньше коэффициент, тем лучше состояние предмета мебели.
+          1.1. Участник&nbsp;&mdash; авторизованный, верифицированный работник Selectel и&nbsp;всех дочерних организаций.
+          <br />1.2. Товар&nbsp;&mdash; предмет мебели, выставленный на&nbsp;продажу в&nbsp;этом приложении.
+          <br />1.3. Розыгрыш&nbsp;&mdash; случайное определение будущего покупателя предмета мебели.
+          <br />1.4. Победитель&nbsp;&mdash; случайно выбранный участник, которому досталось право выкупить предмет мебели.
+          <br />1.5. Износ&nbsp;&mdash; коэффициент износа мебели. Чем меньше коэффициент, тем лучше состояние товара.
         </p>
       </div>
       <!-- Term -->
@@ -38,25 +43,21 @@
           <br />4.2. Победитель обязан подтвердить свое согласие на удержание денежных средств в задаче в Jira.
         </p>
       </div>
-      <div class="mb-6 min-h-[1px] min-w-full bg-[#e2e2e2]"></div>
-      <p class="mb-6 text-sm sm:text-base">
-        Надеюсь юристы помогу тут что-то написать правильное, а то пока как-то неоч
-        Надеюсь юристы помогу тут что-то написать правильное, а то пока как-то неоч
-      </p>
-    </div>
 
-    <div v-if="!isAgree">
-      <button
-        class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed cursor-pointer"
-        @click="onAgreeClickHandler"
-      >
-        Согласен с условиями
-      </button>
-    </div>
-    <div v-else>
-      <p>
-        Вы подтвердили свое согласие с правилами (база данных все помнит)
-      </p>
+      <div v-if="!isAgree">
+        <button
+            class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed cursor-pointer"
+            @click="onAgreeClickHandler"
+        >
+          Согласен с условиями
+        </button>
+      </div>
+      <div v-else>
+        <p>
+          Вы подтвердили свое согласие с правилами (база данных все помнит)
+        </p>
+      </div>
+      <div class="mt-2 min-h-[1px] min-w-full bg-[#e2e2e2]"></div>
     </div>
 
     <modal

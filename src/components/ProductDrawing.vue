@@ -98,9 +98,8 @@
         <div v-if="!isParticipant">
           <div>
             <button
-              v-if="isAgree"
               @click="onClickHandler"
-              class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-3"
+              class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
             >
               Участвовать&nbsp;
               <drawing-count
@@ -108,27 +107,14 @@
                 with-brackets
               ></drawing-count>
             </button>
-            <div v-else>
-              <p>Для участия в розыгрыше необходимо согласиться </p>
-              <button
-                @click="onClickHandler"
-                class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mb-3"
-              >
-                Участвовать&nbsp;
-                <drawing-count
-                    :product-id="productId"
-                    with-brackets
-                ></drawing-count>
-              </button>
-            </div>
 
-            <p class="text-red-500 mb-2" v-if="errorText">
+            <p class="text-red-500 mt-3" v-if="errorText">
               {{ errorText }}
             </p>
 
-            <p class="mb-2">
-              Нажимая кнопку вы подтверждаете свое согласие с <nuxt-link class="font-semibold text-indigo-600 hover:text-indigo-500" to="/store/rules"> правилами</nuxt-link>
-            </p>
+<!--            <p class="mb-2">-->
+<!--              Нажимая кнопку вы подтверждаете свое согласие с <nuxt-link class="font-semibold text-indigo-600 hover:text-indigo-500" to="/store/rules"> правилами</nuxt-link>-->
+<!--            </p>-->
           </div>
         </div>
 
