@@ -100,6 +100,8 @@ export const useFormAuth = () => {
     const data = {
       "email": form.email,
       "emailVisibility": true,
+      "isAdmin": false,
+      "isAgree": false,
       "password": form.password,
       "passwordConfirm": form.password,
       "name": `name_${form.email}`
@@ -112,6 +114,7 @@ export const useFormAuth = () => {
       if (typeof e === "string") {
         serverError.value = e.toUpperCase()
       } else if (e instanceof Error) {
+        console.error(e)
         serverError.value = serverMessageToText[e.message] ?? 'Необработанная ошибка сервера'
       }
     }

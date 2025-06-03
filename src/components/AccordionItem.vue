@@ -20,14 +20,16 @@ const toggleItem = () => {
     <div class="max-w-3xl">
       <h2 class="font-bold text-black text-xl"> {{ title }}</h2>
       <template v-if="isOpen">
-        <slot name="answer"></slot>
+        <div @click.stop>
+          <slot name="answer"></slot>
 
-        <p
-          v-if="answer"
-          class="font-inter mt-4 text-base font-light text-gray-500 cursor-auto"
-          v-html="answer"
-          @click.stop
-        ></p>
+          <p
+              v-if="answer"
+              class="font-inter mt-4 text-base font-light text-gray-500 cursor-auto"
+              v-html="answer"
+              @click.stop
+          ></p>
+        </div>
       </template>
     </div>
     <span class="absolute right-3 top-5">

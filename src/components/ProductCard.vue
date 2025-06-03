@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import {NuxtLink} from "#components"
 import {priceFormatter} from "../helpers";
 
 defineProps<{
@@ -7,13 +8,15 @@ defineProps<{
   imageSrc: string
   price: string,
   isWin?: boolean,
-  isShowStatus?: boolean
+  isShowStatus?: boolean,
+  isFakeLink?: boolean
 }>()
 </script>
 
 <template>
-  <nuxt-link
-    :to="`/store/products/${id}`"
+  <component
+    :is="isFakeLink ? 'div' : NuxtLink"
+    :to="isFakeLink ? null :`/store/products/${id}`"
     class="group flex flex-col min-h-[100%] relative"
   >
     <div class="flex-1 aspect-h-1.5 aspect-w-1 max-h-[500px] w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7 xl:max-h-[300px]">
@@ -21,7 +24,8 @@ defineProps<{
         :src="imageSrc"
         :alt="title"
         loading="lazy"
-        class="h-full w-full object-cover min-h-[100px] object-center [@media(any-hover:hover){&:hover}]:group-hover:opacity-75"
+        class="h-full w-full object-cover min-h-[100px] object-center"
+        :class="isFakeLink ? '' : '[@media(any-hover:hover){&:hover}]:group-hover:opacity-75'"
       />
     </div>
     <h3 class="mt-4 text-sm text-gray-700" v-html="title"></h3>
@@ -38,7 +42,7 @@ defineProps<{
         Пока не розыграно
       </div>
     </div>
-  </nuxt-link>
+  </component>
 </template>
 
 <style scoped lang="css">
