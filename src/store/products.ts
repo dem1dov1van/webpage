@@ -6,15 +6,13 @@ export const useProducts = defineStore("products",    () => {
 
   const pb = new PocketBase(API_BASE)
 
-  const products = ref([])
+  const products = ref<any[]>([])
 
   const isRequesting = ref(true)
   const isError = ref(false)
   const fetchProducts = () => {
     console.log('fetch is go')
-    pb.collection('products').getFullList({
-      sort: '-created',
-    }).then((res) => {
+    pb.collection('products').getFullList().then((res) => {
       products.value = res
       isRequesting.value = false
     }).catch(e => {
