@@ -1,1 +1,1 @@
-export const API_BASE = 'http://api.garagesale.selectel.org'
+export const API_BASE = 'https://api.garagesale.selectel.org'

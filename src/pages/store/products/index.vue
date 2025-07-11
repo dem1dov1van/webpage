@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Breadcrumbs from "~/components/breadcrumbs/Breadcrumbs.vue"
+import Filter from "~/components/Filter.vue"
 import {useProducts} from "~/store/products";
 import {API_BASE} from "~/helpers/constants";
 
@@ -36,6 +37,10 @@ const breadcrumbs = [
         v-else
       class="mt-4"
     >
+    <template #filter>
+      <Filter></Filter>
+    </template>
+
       <product-card
           v-for="item in fetchProducts"
           :id="item.id"
