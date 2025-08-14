@@ -12,6 +12,7 @@
   }>()
 
   const {userModel, isAgree} = storeToRefs(useAccount())
+const {pb} = useAccount()
   const route = useRoute()
 
   const isParticipant = ref(false)
@@ -44,8 +45,14 @@
 
   watch(data, () => isParticipant.value = !!data.value)
 
-  const onClickHandler = () => {
-    if (isParticipant.value) return
+  const onClickHandler = async () => {
+    if (isParticipant.value) return;
+
+    // const record = await pb.collection('requests').create({
+    //   id: requestId.value,
+    //   userId: userModel.value.id,
+    //   productId
+    // });
 
     $fetch(`${API_BASE}/api/collections/requests/records`, {
       method: 'POST',

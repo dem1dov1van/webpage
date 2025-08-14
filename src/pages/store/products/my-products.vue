@@ -43,7 +43,7 @@ const getImageSrc = (name: string, id: string) => `${API_BASE}/api/files/product
 const tryMakeRequest = async () => {
   if (userModel.value && userModel.value.id) {
 
-    const {data, status} = await useFetch(`${API_BASE}/api/collections/requests/records/?filter=userId="${userModel.value.id}"`)
+    const {data, status} = await useFetch(`${API_BASE}/api/collections/requests/records?filter%3DuserId%3D${userModel.value.id}`)
     response.value = data.value?.items
 
     statusRequest.value = status.value
