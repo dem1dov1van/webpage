@@ -68,13 +68,13 @@
 </template>
 
 <script setup lang="ts">
-import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from '@headlessui/vue'
+import { Dialog, DialogPanel, DialogTitle, TransitionChild, TransitionRoot } from "@headlessui/vue"
 import { ExclamationTriangleIcon, CheckCircleIcon } from '@heroicons/vue/24/outline'
 
 withDefaults(defineProps<{
   open: boolean,
   title: string,
-  text: string,
+  text?: string,
   btn1?: string,
   btn2: string,
   status: 'success' | 'error'

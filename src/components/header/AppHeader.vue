@@ -63,6 +63,13 @@
               <div class="py-6">
                 <header-account-info class="!justify-start pointer-events-none mb-2"></header-account-info>
                 <span
+                  v-if="isShowVerifyRequestBtn"
+                  @click="requestVerification"
+                  class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
+                >
+                  Отправить верификационное письмо повторно
+                </span>
+                <span
                   @click="doLogout"
                   class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50"
                 >
@@ -84,10 +91,26 @@ import {
 } from "@heroicons/vue/24/outline";
 import SLogo from '~/assets/icons/logo/shopping-t-rex.svg?skipsvgo'
 import HeaderAccountInfo from "~/components/header/HeaderAccountInfo.vue";
+
+import {useAccount} from "~/store/account";
 import {ref} from "vue";
 
 const {doLogout} = useFormAuth()
+const {isVerify} = storeToRefs(useAccount())
+const {pb} = useAccount()
 const mobileMenuOpen = ref(false)
 
 const closeMenu = () => mobileMenuOpen.value = false
+
+const isRequestVerifyAgain = ref(false)
+
+const requestVerification = async () => {
+  isRequestVerifyAgain.value = true
+  await pb.collection('users').requestVerification(userModel.value.email);
+}
+
+const isShowVerifyRequestBtn = computed(() => {
+  if (isVerify) return false
+  return isRequestVerifyAgain.value
+})
 </script>

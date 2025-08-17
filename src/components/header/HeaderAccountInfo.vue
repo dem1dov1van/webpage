@@ -11,6 +11,7 @@ import {useFormAuth} from "~/composables/useFormAuth";
 
 const {doLogout} = useFormAuth()
 const {isAuth, isVerify, userModel} = storeToRefs(useAccount())
+const {pb} = useAccount()
 
 const isOpen = ref(false)
 
@@ -20,6 +21,18 @@ function closeModal() {
 function openModal() {
   isOpen.value = true
 }
+
+const isRequestVerifyAgain = ref(false)
+
+const requestVerification = async () => {
+  isRequestVerifyAgain.value = true
+  await pb.collection('users').requestVerification(userModel.value.email);
+}
+
+const isShowVerifyRequestBtn = computed(() => {
+  if (isVerify) return false
+  return isRequestVerifyAgain.value
+})
 </script>
 
 <template>
@@ -86,6 +99,14 @@ function openModal() {
                       class="font-semibold text-indigo-600 hover:text-indigo-500 cursor-pointer"
                   >
                     Выйти из аккаунта
+                  </span>
+
+                   <span
+                    v-if="isShowVerifyRequestBtn"
+                    @click="requestVerification"
+                    class="font-semibold text-indigo-600 hover:text-indigo-500 cursor-pointer block"
+                  >
+                    Отправить верификационное письмо повторно
                   </span>
                 </div>
 

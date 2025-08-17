@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import {API_BASE} from "~/helpers/constants";
 import type {TProduct} from "~/types";
 import {useAccount} from "~/store/account";
+const {pb} = useAccount()
 
 const props = withDefaults(defineProps<{
   product: TProduct
@@ -24,26 +24,42 @@ onMounted(() => {
 })
 
 const onChooseWinnerHandler = async () => {
-  $fetch(`${API_BASE}/api/collections/requests/records/?filter=productId="${props.product.id}"`)
-    .then((res) => randomRequest.value = getRandomElement(res?.items || []))
-    .catch(e => console.error(e, 'error when fetch all requests'))
-  }
 
-watch(randomRequest, () => {
-  $fetch<{email: string}>(`${API_BASE}/api/collections/users/records/${randomPersonId.value}`)
-    .then((res) => winnerEmail.value = res?.email)
-    .then(registerWinner)
-    .catch(e => console.error(e, 'error when fetch user by id'))
+  try {
+    const requests = await pb.collection('requests').getFullList({
+      filter: `productId = '${props.product.id}'`,
+    });
+    randomRequest.value = getRandomElement(requests || [])
+
+  } catch (e) {
+    console.error(e, 'error when fetch products by id')
+  }
+}
+
+watch(randomRequest, async () => {
+  if(randomPersonId.value) {
+    try {
+      const user = await pb.collection('users').getOne(randomPersonId.value);
+      winnerEmail.value = user.email
+      registerWinner()
+    } catch (e) {
+      console.error(e, 'error when fetch user by id')
+    }
+  }
 })
 
-const registerWinner = () => {
-  $fetch(`${API_BASE}/api/collections/products/records/${props.product.id}`, {
-    method: "patch",
-    body: {
-      title: props.product.title,
-      winner: randomPersonId.value
-    }
-  }).catch(e => console.error(e, 'error when patch product'))
+const registerWinner = async () => {
+
+  const data = {
+    "title": props.product.title,
+    "winner": randomPersonId.value
+  };
+
+  try {
+    await pb.collection('products').update(props.product.id, data);
+  } catch(e) {
+    alert('Не удалось зафиксировать победителя')
+  }
 }
 
 function getRandomElement(arr: any[]) {
@@ -62,17 +78,16 @@ const isAdmin = computed(() => userModel.value?.isAdmin || false)
 
 <template>
   <div v-if="isAdmin" class="flow-root p-3">
-
     <h2 class="text-xl mb-4">Эту часть видят только админы:</h2>
 
-    <template v-if="!product.winner">
+    <template v-if="!winnerEmail || !product.winner">
       <p class="mb-2">
         Нажимая кнопку вы получите рандомного участника, что выбрал этот товар:
       </p>
 
       <button
         @click="onChooseWinnerHandler"
-        :disabled="winnerEmail"
+        :disabled="!!winnerEmail"
         class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed"
       >
         Выбрать победителя

@@ -23,7 +23,7 @@ export const useFormAuth = () => {
         type: "pattern",
         message: "Недопустимый email",
         validator: (rule, value, callback) => {
-          if(!/^[a-zA-Z0-9._%+-]+@([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.[a-zA-Z]{2,})$/.test(value)) {
+          if(!/^[a-zA-Z0-9._%-]+@([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\.[a-zA-Z]{2,})$/.test(value)) {
             callback(new Error())
           } else {
             callback()

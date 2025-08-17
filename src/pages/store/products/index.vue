@@ -37,9 +37,9 @@ const breadcrumbs = [
         v-else
       class="mt-4"
     >
-    <template #filter>
+    <!-- <template #filter>
       <Filter></Filter>
-    </template>
+    </template> -->
 
       <product-card
           v-for="item in fetchProducts"

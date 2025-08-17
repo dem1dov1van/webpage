@@ -1,4 +1,5 @@
 <template>
+  <div>
   <Breadcrumbs :items="breadcrumbs"></Breadcrumbs>
 
   <div class="mt-4">
@@ -17,10 +18,12 @@
         :price="item.priceWithDiscount"
         :imageSrc="getImageSrc(item.images[0], item.id)"
         :is-win="item.winner === userModel.id"
+        :status="getStatus(item.winner)"
         is-show-status
       ></product-card>
     </products-card-grid>
     <my-products-empty-state v-else></my-products-empty-state>
+  </div>
   </div>
 </template>
 
@@ -29,7 +32,9 @@
 import {API_BASE} from "~/helpers/constants";
 import {useAccount} from "~/store/account";
 import {useProducts} from "~/store/products";
+
 const {userModel} = storeToRefs(useAccount())
+const {pb} = useAccount()
 const {products, isRequesting} = storeToRefs(useProducts())
 
 const statusRequest = ref('pending')
@@ -38,19 +43,28 @@ const response = ref(null)
 const addedProducts = computed(() => products.value.filter(item => response.value?.some(res => res.productId === item.id)))
 const hasAddedProducts = computed(() => !!addedProducts.value.length)
 
+const getStatus = (winner: string | undefined) => {
+  if (!winner) return undefined
+  if (winner === userModel.value.id) return 'win'
+  return 'lose'
+}
+
 const getImageSrc = (name: string, id: string) => `${API_BASE}/api/files/products/${id}/${name}`
 
 const tryMakeRequest = async () => {
   if (userModel.value && userModel.value.id) {
 
-    const {data, status} = await useFetch(`${API_BASE}/api/collections/requests/records?filter%3DuserId%3D${userModel.value.id}`)
-    response.value = data.value?.items
+    const records = await pb.collection('requests').getFullList({
+      filter: `userId = '${userModel.value.id}'`
+    });
 
-    statusRequest.value = status.value
+    response.value = records
+
+    statusRequest.value = "success"
   }
 }
 
-tryMakeRequest()
+onMounted(tryMakeRequest)
 
 
 // const requestAllProducts = () => {

@@ -1,6 +1,5 @@
 <template>
   <Container>
-    {{ isAgree }}
     <div class="flex max-w-3xl flex-col py-10 md:py-12 lg:py-16">
       <!-- Title -->
       <h1 class="mb-10 text-3xl font-bold md:text-5xl">Правила участия</h1>
@@ -111,7 +110,7 @@ const onAgreeClickHandler = () => isOpenModal.value = true
 
 const setIsAgree = async() => {
   const data =  {
-    isAgree: true,
+    isAgree: true
   }
 
   try {

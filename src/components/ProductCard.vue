@@ -7,7 +7,9 @@ defineProps<{
   title: string
   imageSrc: string
   price: string,
+  status?: 'win' | 'lose' | undefined
   isWin?: boolean,
+  isLose?: boolean
   isShowStatus?: boolean,
   isFakeLink?: boolean
 }>()
@@ -32,14 +34,19 @@ defineProps<{
     <p class="mt-1 text-lg font-medium text-gray-900">
       {{ priceFormatter(price) }}
     </p>
-    <div v-if="isWin" class="inline-flex items-center justify-between space-x-1 bg-green-100 text-green-800 px-2 py-0.5 rounded-md text-sm absolute top-2 left-2">
+    <div v-if="status === 'win'" class="inline-flex items-center justify-between space-x-1 bg-green-100 text-green-800 px-2 py-0.5 rounded-md text-sm absolute top-2 left-2">
       <div class="select-none">
         Это теперь твое)
       </div>
     </div>
-    <div v-if="!isWin && isShowStatus" class="inline-flex items-center justify-between space-x-1 bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md text-sm absolute top-2 left-2">
+    <div v-if="!status && isShowStatus" class="inline-flex items-center justify-between space-x-1 bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md text-sm absolute top-2 left-2">
       <div class="select-none">
         Пока не розыграно
+      </div>
+    </div>
+    <div v-if="status === 'lose' && isShowStatus" class="inline-flex items-center justify-between space-x-1 bg-red-100 text-red-800 px-2 py-0.5 rounded-md text-sm absolute top-2 left-2">
+      <div class="select-none">
+        Уже нашел своего владельца
       </div>
     </div>
   </component>

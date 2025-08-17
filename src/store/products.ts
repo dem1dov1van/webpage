@@ -11,7 +11,6 @@ export const useProducts = defineStore("products",    () => {
   const isRequesting = ref(true)
   const isError = ref(false)
   const fetchProducts = () => {
-    console.log('fetch is go')
     pb.collection('products').getFullList().then((res) => {
       products.value = res
       isRequesting.value = false
