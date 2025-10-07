@@ -117,4 +117,12 @@ const toggleModalHandler = (bool: boolean) => isOpenErrorModal.value = bool
 definePageMeta({
   layout: 'empty'
 })
+
+useSeoMeta({
+  title: 'Авторизация | Garagesale',
+  description: "Выбирайте понравившийся товар и добавляйте в корзину",
+
+  ogTitle: 'Авторизация | Garagesale',
+  ogDescription: "Выбирайте понравившийся товар и добавляйте в корзину",
+});
 </script>

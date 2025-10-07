@@ -135,4 +135,12 @@ watch(form, async () => {
 definePageMeta({
   layout: 'empty'
 })
+
+useSeoMeta({
+  title: "Регистрация | Garagesale",
+  description: "Выбирайте понравившийся товар и добавляйте в корзину",
+
+  ogTitle: "Регистрация | Garagesale",
+  ogDescription: "Выбирайте понравившийся товар и добавляйте в корзину",
+});
 </script>

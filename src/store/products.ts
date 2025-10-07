@@ -17,6 +17,7 @@ export const useProducts = defineStore("products",    () => {
     }).catch(e => {
       console.error(e)
       isError.value = true
+      isRequesting.value = false
     })
   }
   fetchProducts()

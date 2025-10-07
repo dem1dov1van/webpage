@@ -89,77 +89,90 @@ const solutions = [
     `,
   },
 ]
+
+const availableFilters = ['armchair', 'desk', 'sofa', 'chair', 'closet', 'another']
+const activeFilters = ref([])
+
+const keyToNameDetailed = {
+  'armchair': 'Кресла',
+  'desk': 'Столы',
+  'sofa': 'Диваны',
+  'chair': 'Стулья', 
+  'closet': 'Шкафы',
+  'another': 'Другое'
+} as const
+
+const resetFilters = () => activeFilters.value = []
+
+const emit = defineEmits(['changeFilter'])
+
+watch(activeFilters, () => emit('changeFilter', activeFilters.value))
 </script>
 
 <template>
-  <div class="sticky max-w-[300px] right-0 top-[170px] z-10 self-end -translate-y-[70px] h-[0px]">
-  <Popover v-slot="{ open }" class="relative">
+  <div class="sticky max-w-[250px] right-0 top-[170px] z-10 self-end -translate-y-[70px] h-[0px]">
+    <Popover v-slot="{ open }" class="relative">
       <PopoverButton
-      :class="open ? 'text-white' : 'text-white/90'"
-      class="w-full px-3 py-2 bg-indigo-600 hover:bg-indigo-700 transition-all duration-500 rounded-full text-white text-xs font-semibold leading-4 text-center"
+        :class="open ? 'text-white' : 'text-white/90'"
+        class="w-full px-3 py-2 bg-indigo-600 hover:bg-indigo-700 transition-all duration-500 rounded-full text-white text-xs font-semibold leading-4 text-center"
       >
-      <span>Фильтры</span>
-      <ChevronDownIcon
+        <span>
+          Фильтры
+          <span v-if="activeFilters.length">({{ activeFilters.length }})</span>
+        </span>
+        <ChevronDownIcon
           :class="open ? 'text-orange-300' : 'text-orange-300/70'"
           class="ml-2 h-5 w-5 transition duration-150 ease-in-out group-hover:text-orange-300/80"
           aria-hidden="true"
-      />
+        />
       </PopoverButton>
 
       <transition
-      enter-active-class="transition duration-200 ease-out"
-      enter-from-class="translate-y-1 opacity-0"
-      enter-to-class="translate-y-0 opacity-100"
-      leave-active-class="transition duration-150 ease-in"
-      leave-from-class="translate-y-0 opacity-100"
-      leave-to-class="translate-y-1 opacity-0"
+        enter-active-class="transition duration-200 ease-out"
+        enter-from-class="translate-y-1 opacity-0"
+        enter-to-class="translate-y-0 opacity-100"
+        leave-active-class="transition duration-150 ease-in"
+        leave-from-class="translate-y-0 opacity-100"
+        leave-to-class="translate-y-1 opacity-0"
       >
-      <PopoverPanel
-        class="absolute right-0 z-10 mt-3 w-[300px] transform"
-      >
-        <Checkbox></Checkbox>
-          <div class="overflow-hidden rounded-lg shadow-lg ring-1 ring-black/5">
-          <div class="relative grid gap-8 bg-white p-7 lg:grid-cols-2">
-              <a
-              v-for="item in solutions"
-              :key="item.name"
-              :href="item.href"
-              class="-m-3 flex items-center rounded-lg p-2 transition duration-150 ease-in-out hover:bg-gray-50 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
+        <PopoverPanel
+          class="absolute right-4 z-10 mt-3 w-[250px] transform"
+        >
+          <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4 p-5">
+            <div class="px-5 py-4 border-b border-gray-200">
+              <h2 class="text-lg font-semibold text-gray-800">Категория</h2>
+            </div>
+
+            <div class="mt-2">
+              <label 
+                v-for="filter in availableFilters"
+                :key="filter"
+                class="flex items-center space-x-3 cursor-pointer group"
               >
-              <div
-                  class="flex h-10 w-10 shrink-0 items-center justify-center text-white sm:h-12 sm:w-12"
-              >
-                  <div v-html="item.icon"></div>
-              </div>
-              <div class="ml-4">
-                  <p class="text-sm font-medium text-gray-900">
-                  {{ item.name }}
-                  </p>
-                  <p class="text-sm text-gray-500">
-                  {{ item.description }}
-                  </p>
-              </div>
-              </a>
+                <input 
+                  type="checkbox" 
+                  :value="filter"
+                  v-model="activeFilters" 
+                  class="w-4 h-4 text-indigo-600 bg-gray-100 border-gray-300 rounded focus:ring-indigo-700 focus:ring-2"
+                >
+                <span class="text-gray-700 group-hover:text-gray-900">
+                  {{ keyToNameDetailed[filter] }}
+                </span>
+              </label>
+            </div>
+
+            <button
+              v-if="activeFilters.length"
+              @click="resetFilters"
+              class="mt-4 flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed"
+            >
+              Сбросить все
+            </button>
           </div>
-          <div class="bg-gray-50 p-4">
-              <a
-              href="##"
-              class="flow-root rounded-md px-2 py-2 transition duration-150 ease-in-out hover:bg-gray-100 focus:outline-none focus-visible:ring focus-visible:ring-orange-500/50"
-              >
-              <span class="flex items-center">
-                  <span class="text-sm font-medium text-gray-900">
-                  Documentation
-                  </span>
-              </span>
-              <span class="block text-sm text-gray-500">
-                  Start integrating products and tools
-              </span>
-              </a>
-          </div>
-          </div>
-      </PopoverPanel>
+
+        </PopoverPanel>
       </transition>
-  </Popover>
+    </Popover>
   </div>
 </template>
 

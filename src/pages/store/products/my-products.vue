@@ -93,11 +93,19 @@ watch(() => userModel.value, tryMakeRequest)
 
 const breadcrumbs = [
   {
-    label: 'Все продукты',
+    label: 'Все товары',
     to: '/store/products/'
   },
   {
-    label: 'Мои продукты'
+    label: 'Мои товары'
   }
 ]
+
+useSeoMeta({
+  title: 'Мои товары | Garagesale',
+  description: "Выбирайте понравившийся товар и добавляйте в корзину",
+
+  ogTitle: 'Мои товары | Garagesale',
+  ogDescription: "Выбирайте понравившийся товар и добавляйте в корзину",
+});
 </script>

@@ -11,7 +11,8 @@ const fetchProducts = computed(() => products.value?.filter(item => !item.winner
     id: item.id,
     title: item.title,
     imageSrc: `${API_BASE}/api/files/${item.collectionName}/${item.id}/${item.images[0]}`,
-    price: item.priceWithDiscount
+    price: item.priceWithDiscount,
+    category: item.category
   }
 
   return obj
@@ -19,9 +20,32 @@ const fetchProducts = computed(() => products.value?.filter(item => !item.winner
 
 const breadcrumbs = [
   {
-    label: 'Все продукты'
+    label: 'Все товары'
   }
 ]
+
+useSeoMeta({
+  title: "Все товары | Garagesale",
+  description: "Выбирайте понравившийся товар и добавляйте в корзину",
+
+  ogTitle: "Все товары | Garagesale",
+  ogDescription: "Выбирайте понравившийся товар и добавляйте в корзину",
+});
+
+const changeFilter = (val) => {
+  console.log('changeFilter', val)
+  activeFilters.value = val
+}
+
+const activeFilters = ref([])
+
+const filteredProducts = computed(() => {
+  if (activeFilters.value.length === 0) {
+    return fetchProducts.value
+  }
+  
+  return fetchProducts.value.filter(product => activeFilters.value.includes(product.category))
+})
 </script>
 
 <template>
@@ -33,21 +57,22 @@ const breadcrumbs = [
     >
       <loader></loader>
     </div>
+
     <products-card-grid
-        v-else
+      v-else
       class="mt-4"
     >
-    <!-- <template #filter>
-      <Filter></Filter>
-    </template> -->
+    <template #filter>
+      <Filter @changeFilter="changeFilter"></Filter>
+    </template>
 
       <product-card
-          v-for="item in fetchProducts"
-          :id="item.id"
-          :key="item.id"
-          :title="item.title"
-          :price="item.price"
-          :imageSrc="item.imageSrc"
+        v-for="item in filteredProducts"
+        :id="item.id"
+        :key="item.id"
+        :title="item.title"
+        :price="item.price"
+        :imageSrc="item.imageSrc"
       ></product-card>
     </products-card-grid>
   </div>

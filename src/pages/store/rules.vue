@@ -116,4 +116,12 @@ const breadcrumbs = [
     label: 'Правила'
   }
 ]
+
+useSeoMeta({
+  title: 'Правила | Garagesale',
+  description: "Выбирайте понравившийся товар и добавляйте в корзину",
+
+  ogTitle: 'Правила | Garagesale',
+  ogDescription: "Выбирайте понравившийся товар и добавляйте в корзину",
+});
 </script>

@@ -18,7 +18,7 @@ defineProps<{
 <template>
   <component
     :is="isFakeLink ? 'div' : NuxtLink"
-    :to="isFakeLink ? null :`/store/products/${id}`"
+    :to="isFakeLink ? null :`/store/products/product?id=${id}`"
     class="group flex flex-col min-h-[100%] relative"
   >
     <div class="flex-1 aspect-h-1.5 aspect-w-1 max-h-[500px] w-full overflow-hidden rounded-lg bg-gray-200 xl:aspect-h-8 xl:aspect-w-7 xl:max-h-[300px]">
