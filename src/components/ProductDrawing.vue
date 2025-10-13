@@ -14,7 +14,7 @@
   const route = useRoute()
 
   const isParticipant = ref(false)
-  const productId = route.params.products as string
+  const productId = route.query.id as string
   const requestId = computed(() => `${get8FirstSymbols(userModel.value.id)}${get7LastSymbols(productId)}`)
   const errorText = ref('')
   const isOpenSuccessModal = ref(false)

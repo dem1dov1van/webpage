@@ -13,6 +13,12 @@ import Qr from '~/assets/icons/qr.svg?skipsvgo'
 definePageMeta({
   layout: 'empty'
 })
+
+onMounted(() => {
+  setTimeout(() => {
+    navigateTo('/store/products/')
+  }, 5000)
+})
 </script>
 
 <style lang="css" scoped>
