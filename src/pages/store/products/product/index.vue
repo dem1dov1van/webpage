@@ -57,8 +57,8 @@
           </div>
         </div>
 
-        <div class="flex flex-col gap-2 lg:gap-4">
-          <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm flex-1">
+        <div class="flex flex-col gap-2 lg:gap-4 justify-between">
+          <div class="flow-root rounded-lg border border-gray-100 py-3 shadow-sm">
             <dl class="-my-3 divide-y divide-gray-100 text-sm">
               <!--                <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">-->
               <!--                <dt class="font-medium text-gray-900">productId</dt>-->

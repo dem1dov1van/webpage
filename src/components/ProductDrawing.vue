@@ -85,46 +85,55 @@
   <div>
     <section v-if="status !== 'pending'">
       <div class="grid grid-cols-1 gap-4 lg:gap-8">
-        <div v-if="product.winner === userModel.id" class="grid gap-4 p-3">
-          Ура, фортуна на твоей стороне <br>
-          После оплаты, ты - новый владелец!
-        </div>
-        <div v-else class="p-3">
-          <div v-if="!isParticipant">
-            <div>
-              <button
-                @click="onClickHandler"
-                class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-              >
-                Участвовать&nbsp;
-                <drawing-count
-                  :product-id="productId"
-                  with-brackets
-                ></drawing-count>
-              </button>
+        <div v-if="!product.winner">
+          
+          <div class="p-3">
+            <div v-if="!isParticipant">
+              <div>
+                <button
+                  @click="onClickHandler"
+                  class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
+                >
+                  Участвовать&nbsp;
+                  <drawing-count
+                    :product-id="productId"
+                    with-brackets
+                  ></drawing-count>
+                </button>
 
-              <p class="text-red-500 mt-3" v-if="errorText">
+                <p class="text-red-500 mt-3" v-if="errorText">
+                  {{ errorText }}
+                </p>
+
+    <!--            <p class="mb-2">-->
+    <!--              Нажимая кнопку вы подтверждаете свое согласие с <nuxt-link class="font-semibold text-indigo-600 hover:text-indigo-500" to="/store/rules"> правилами</nuxt-link>-->
+    <!--            </p>-->
+              </div>
+            </div>
+
+            <div v-else class="w-full bg-white rounded-lg p-2">
+              <p>Твое участие зарегистрированно!</p>
+              <p><drawing-count :product-id="productId" text></drawing-count></p>
+              <button
+                @click="onDeleteClickHandler"
+                class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed mt-2"
+              >
+                Отказаться от участия
+              </button>
+              <p class="text-red-500 mt-1" v-if="errorText">
                 {{ errorText }}
               </p>
-
-  <!--            <p class="mb-2">-->
-  <!--              Нажимая кнопку вы подтверждаете свое согласие с <nuxt-link class="font-semibold text-indigo-600 hover:text-indigo-500" to="/store/rules"> правилами</nuxt-link>-->
-  <!--            </p>-->
             </div>
           </div>
+        </div>
+        <div v-else>
+          <div v-if="product.winner === userModel.id" class="grid gap-4 p-3">
+            Ура, фортуна на твоей стороне <br>
+            После оплаты, ты - новый владелец!
+          </div>
 
-          <div v-else class="w-full bg-white rounded-lg p-2">
-            <p>Твое участие зарегистрированно!</p>
-            <p><drawing-count :product-id="productId" text></drawing-count></p>
-            <button
-              @click="onDeleteClickHandler"
-              class="flex w-full justify-center rounded-md bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-75 disabled:hover:bg-indigo-600 disabled:cursor-not-allowed mt-2"
-            >
-              Отказаться от участия
-            </button>
-            <p class="text-red-500 mt-1" v-if="errorText">
-              {{ errorText }}
-            </p>
+          <div v-else class="grid gap-4 p-3">
+            Этот товар уже ждет своего победителя
           </div>
         </div>
       </div>

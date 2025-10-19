@@ -41,7 +41,7 @@ defineProps<{
     </div>
     <div v-if="!status && isShowStatus" class="inline-flex items-center justify-between space-x-1 bg-blue-100 text-blue-800 px-2 py-0.5 rounded-md text-sm absolute top-2 left-2">
       <div class="select-none">
-        Пока не розыграно
+        Пока не разыграно
       </div>
     </div>
     <div v-if="status === 'lose' && isShowStatus" class="inline-flex items-center justify-between space-x-1 bg-red-100 text-red-800 px-2 py-0.5 rounded-md text-sm absolute top-2 left-2">

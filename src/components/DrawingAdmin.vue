@@ -37,7 +37,7 @@ const onChooseWinnerHandler = async () => {
 }
 
 watch(randomRequest, async () => {
-  if(randomPersonId.value) {
+  if(randomPersonId.value && isAdmin.value) {
     try {
       const user = await pb.collection('users').getOne(randomPersonId.value);
       winnerEmail.value = user.email
@@ -49,7 +49,6 @@ watch(randomRequest, async () => {
 })
 
 const registerWinner = async () => {
-
   const data = {
     "title": props.product.title,
     "winner": randomPersonId.value
