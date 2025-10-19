@@ -68,7 +68,7 @@
             :open="isOpenVerifyModal"
             @toggle="toggleModalHandler"
             title="Аккаунт успешно зарегистрирован!"
-            :text="`Осталось только подтвердить свою почту и авторизоваться в этом приложении. Письмо для подтверджения отправлено на ${form.email}`"
+            :text="`Осталось только <a href='https://mail.selectel.org/' target='_blank' class='font-semibold text-indigo-600 hover:text-indigo-500'>подтвердить </a> свою почту и авторизоваться в этом приложении. Письмо для подтверджения отправлено на ${form.email}`"
             btn2="Авторизоваться"
             status="success"
             @btn2-click="navigateTo('/store/login/')"
