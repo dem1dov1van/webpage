@@ -6,7 +6,7 @@ defineProps<{
   id: string
   title: string
   imageSrc: string
-  price: string,
+  price: number,
   status?: 'win' | 'lose' | undefined
   isWin?: boolean,
   isLose?: boolean
@@ -26,13 +26,13 @@ defineProps<{
         :src="imageSrc"
         :alt="title"
         loading="lazy"
-        class="h-full w-full object-cover min-h-[100px] object-center"
-        :class="isFakeLink ? '' : '[@media(any-hover:hover){&:hover}]:group-hover:opacity-75'"
+        class="h-full w-full object-cover min-h-[100px] object-center transition-transform duration-200"
+        :class="isFakeLink ? '' : 'lg:group-hover:scale-[1.05]'"
       />
     </div>
     <h3 class="mt-4 text-sm text-gray-700" v-html="title"></h3>
     <p class="mt-1 text-lg font-medium text-gray-900">
-      {{ priceFormatter(price) }}
+      {{ priceFormatter(Math.floor(price)) }}
     </p>
     <div v-if="status === 'win'" class="inline-flex items-center justify-between space-x-1 bg-green-100 text-green-800 px-2 py-0.5 rounded-md text-sm absolute top-2 left-2">
       <div class="select-none">

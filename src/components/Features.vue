@@ -4,7 +4,7 @@
 
 <template>
   <Container>
-    <div class="flex flex-col items-center">
+    <div class="flex flex-col items-center scroll-my-[110px]" id="calculation-of-depreciation">
         <div class="mb-4 md:mb-6 lg:mb-8">
           <h2 class="text-2xl font-bold md:text-3xl w-full max-w-2xl text-center"> Расчет износа </h2>
         </div>

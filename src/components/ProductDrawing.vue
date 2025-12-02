@@ -73,7 +73,8 @@
   const onDeleteClickHandler = async () => {
     try {
       await pb.collection('requests').delete(requestId.value);
-      navigateTo('/store/products/')
+      // window.location.reload();
+      refreshNuxtData()
     } catch (e) {
       errorText.value = serverMessageToText[e?.data.message] ?? 'Ошибка сервера'
       console.error(errorText.value)
@@ -129,7 +130,7 @@
         <div v-else>
           <div v-if="product.winner === userModel.id" class="grid gap-4 p-3">
             Ура, фортуна на твоей стороне <br>
-            После оплаты, ты - новый владелец!
+            После оплаты, ты &mdash; новый владелец!
           </div>
 
           <div v-else class="grid gap-4 p-3">

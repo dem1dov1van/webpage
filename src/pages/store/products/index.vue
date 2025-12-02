@@ -33,7 +33,6 @@ useSeoMeta({
 });
 
 const changeFilter = (val) => {
-  console.log('changeFilter', val)
   activeFilters.value = val
 }
 

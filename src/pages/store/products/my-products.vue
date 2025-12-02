@@ -66,30 +66,7 @@ const tryMakeRequest = async () => {
 
 onMounted(tryMakeRequest)
 
-
-// const requestAllProducts = () => {
-//   if (response.value && Array.isArray(response.value)) {
-//     response.value.forEach(item => {
-//       fetchProduct(item.productId)
-//     })
-//   }
-// }
-
 watch(() => userModel.value, tryMakeRequest)
-
-// onMounted(() => fetchProduct())
-
-// const fetchProduct = (id: string) => {
-//   fetch(`${API_BASE}/api/collections/products/records/${id}`).then((res) => {
-//     if (res.ok) return res.json()
-//     else throw new Error('res is not ok(')
-//   }).then(res => {
-//     console.log(res)
-//     addedProducts.push(res)
-//   }).catch(e => console.log(e, 'err'))
-// }
-
-// watch(response, requestAllProducts)
 
 const breadcrumbs = [
   {

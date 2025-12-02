@@ -81,7 +81,7 @@
               </div>
 
               <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
-                <dt class="font-medium text-gray-900">Износ</dt>
+                <dt class="font-medium text-gray-900"><nuxt-link to="/store/rules/#calculation-of-depreciation" class="font-semibold text-indigo-600 hover:text-indigo-500">Износ</nuxt-link></dt>
                 <dd class="text-gray-700 sm:col-span-2" v-html="percentageOfWear"></dd>
               </div>
 
@@ -108,7 +108,7 @@
               <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                 <dt class="font-medium text-gray-900">Цена со скидкой</dt>
                 <dd class="text-gray-700 sm:col-span-2">
-                  <span v-html="priceFormatter(priceWithDiscount ?? 0)"></span>
+                  <span v-html="priceFormatter(Math.floor(priceWithDiscount ?? 0))"></span>
                 </dd>
               </div>
 
@@ -119,7 +119,7 @@
               v-if="isAuth && !isAgree" 
               class="p-3 flex items-center justify-center gap-2"
             >
-              Для участия необходимо согласие с <nuxt-link to="/store/rules/" class="font-semibold text-indigo-600 hover:text-indigo-500">правилами</nuxt-link>
+              <span>Для участия необходимо согласие с <nuxt-link to="/store/rules/" class="font-semibold text-indigo-600 hover:text-indigo-500">правилами</nuxt-link></span>
               <Attention class="max-w-[25px] max-h-[25px]"></Attention>
             </p>
             <p 
