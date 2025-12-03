@@ -85,7 +85,7 @@
                 <dd class="text-gray-700 sm:col-span-2" v-html="percentageOfWear"></dd>
               </div>
 
-              <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
+              <!-- <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">
                 <dt class="font-medium text-gray-900 ">Фото</dt>
                 <dd class="text-gray-700 sm:col-span-2">
                   <a
@@ -96,7 +96,7 @@
                     {{imageLink}}
                   </a>
                 </dd>
-              </div>
+              </div> -->
 
 <!--              <div class="grid grid-cols-1 gap-1 p-3 sm:grid-cols-3 sm:gap-4">-->
 <!--                <dt class="font-medium text-gray-900">Цена</dt>-->
@@ -186,7 +186,7 @@ const title = computed(() => data.value?.title)
 const description = computed(() => data.value?.description)
 // const price = computed(() => data.value?.price)
 const priceWithDiscount = computed(() => data.value?.priceWithDiscount)
-const imageLink = computed(() => data.value?.imageLink)
+// const imageLink = computed(() => data.value?.imageLink)
 const dimensions = computed(() => data.value?.dimensions)
 const percentageOfWear = computed(() => data.value?.percentageOfWear)
 const images = computed(() => data.value?.images)

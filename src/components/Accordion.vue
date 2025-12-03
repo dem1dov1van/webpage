@@ -43,7 +43,7 @@
       <accordion-item title="Какие сроки?">
         <template #answer>
           <ul class="list font-inter mt-4 text-base font-light text-gray-500 cursor-auto">
-            <li>сроки сбора заявок – 15 рабочих дней</li>
+            <li>сроки сбора заявок – 10 рабочих дней</li>
             <li>сроки подведения итогов – 5 рабочих дней</li>
             <li>срок оплаты – 5 рабочих дней</li>
             <li>подготовка мебели и сроки выдачи товара – 15 рабочих дней</li>
