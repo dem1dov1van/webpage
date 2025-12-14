@@ -1,11 +1,10 @@
 <script setup lang="ts">
-import {API_BASE} from "~/helpers/constants";
 import {useAccount} from "~/store/account";
 const {userModel} = storeToRefs(useAccount())
 const {pb} = useAccount()
 
 const statusRequest = ref('pending')
-const response = ref(null)
+const response = ref(0)
 
 const props = withDefaults(defineProps<{
   productId: string,
@@ -18,17 +17,20 @@ const props = withDefaults(defineProps<{
   text: false
 })
 
-const quoteUrl = '%27'
-const equalsUrl = '%3D'
-
 const tryMakeRequest = async () => {
   if (userModel.value && userModel.value.id) {
 
-    const {data, status} = await useFetch(`${API_BASE}/api/collections/requests/records?filter=productId${equalsUrl}${quoteUrl}${props.productId}${quoteUrl}`)
-    //@ts-ignore
-    response.value = data.value?.items.length || 0
+    statusRequest.value = 'loading'
+    try {
+      const records = await pb.collection('requests').getFullList({
+        filter: `productId = "${props.productId}"`,
+      });
 
-    statusRequest.value = status.value
+      response.value = records?.length || 0
+      statusRequest.value = 'success'
+    } catch {
+      statusRequest.value = 'error'
+    }
   }
 }
 
