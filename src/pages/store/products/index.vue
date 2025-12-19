@@ -50,7 +50,9 @@ const filteredProducts = computed(() => {
 <template>
   <div>
     <Breadcrumbs :items="breadcrumbs"></Breadcrumbs>
-    <div
+    <Finish></Finish>
+
+    <!-- <div
       v-if="isRequesting"
       class="flex items-center justify-center min-h-[100vh] min-w-[100vw]"
     >
@@ -73,7 +75,7 @@ const filteredProducts = computed(() => {
         :price="item.price"
         :imageSrc="item.imageSrc"
       ></product-card>
-    </products-card-grid>
+    </products-card-grid> -->
   </div>
 </template>
 
